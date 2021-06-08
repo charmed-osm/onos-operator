@@ -1,0 +1,24 @@
+# Copyright 2021 David Garcia
+# See LICENSE file for licensing details.
+name: onos
+description: |
+  ONOS stands for Open Network Operating System.
+  ONOS provides the control plane for a software-defined network (SDN),
+  managing network components, such as switches and links, and running
+  software programs or modules to provide communication services to end
+  hosts and neighboring networks.
+summary: |
+  ONOS SDN controller
+
+containers:
+  onos:
+    resource: onos-image
+
+resources:
+  onos-image:
+    type: oci-image
+    description: OCI image for Onos image
+
+peers:
+  cluster:
+    interface: onos-cluster

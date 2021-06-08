@@ -1,0 +1,25 @@
+# Copyright 2021 David Garcia
+# See LICENSE file for licensing details.
+
+restart:
+  description: Restart ONOS service
+activate-app:
+  description: Activate application
+  params:
+    name:
+      description: Name of the application
+      type: string
+  required:
+    - name
+deactivate-app:
+  description: Deactivate application
+  params:
+    name:
+      description: Name of the application
+      type: string
+  required:
+    - name
+list-activated-apps:
+  description: List active applications
+list-available-apps:
+  description: List all available applications
