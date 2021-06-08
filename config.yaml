@@ -10,3 +10,6 @@ options:
     description: Enable the ONOS gui at port 8181
     type: boolean
     default: True
+  external-hostname:
+    description: External hostname for the ingress
+    type: string

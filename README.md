@@ -70,6 +70,18 @@ juju run-action onos/0 activate-app --string-args name=org.onosproject.acl --wai
 juju run-action onos/0 deactivate-app --string-args name=org.onosproject.acl --wait
 ```
 
+### Exposing the UI
+
+The current way of exposing the service is using the `nginx-ingress-integrator` charm. It can be easily configured executing the following commands:
+
+```bash
+K8S_WORKER_IP=192.168.0.12  # change this IP with the IP of your K8s worker
+juju config onos external-hostname=onos.$K8S_WORKER_IP.nip.io
+
+juju deploy nginx-ingress-integrator ingress
+juju relate ingress onos
+```
+
 ## Developing
 
 Create and activate a virtualenv with the development requirements:

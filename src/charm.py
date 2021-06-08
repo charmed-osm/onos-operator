@@ -16,6 +16,7 @@ import logging
 import requests
 
 
+from charms.nginx_ingress_integrator.v0.ingress import IngressRequires
 from ops.charm import CharmBase
 from ops.framework import StoredState
 from ops.main import main
@@ -55,6 +56,14 @@ class OnosCharm(CharmBase):
         self.framework.observe(self.on.restart_action, self.restart_action)
 
         self._stored.set_default(apps=set({SYS_APP}), started=False)
+        self.ingress = IngressRequires(
+            self,
+            {
+                "service-hostname": self.config.get("external-hostname"),
+                "service-name": self.app.name,
+                "service-port": 8181,
+            },
+        )
 
     @property
     def onos_container(self):
@@ -70,6 +79,9 @@ class OnosCharm(CharmBase):
 
     def _on_config_changed(self, event):
         self._check_gui_app()
+        self.ingress.update_config(
+            {"service-hostname": self.config.get("external-hostname")}
+        )
 
     def add_onos_service_layer(self, event):
         self._configure_async_logging()
@@ -221,7 +233,6 @@ class OnosCharm(CharmBase):
             self._activate_app(GUI_APP)
         elif not config_enable_gui and gui_enabled:
             self._deactivate_app(GUI_APP)
-
 
 
 if __name__ == "__main__":
