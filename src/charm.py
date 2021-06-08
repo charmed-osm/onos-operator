@@ -236,4 +236,4 @@ class OnosCharm(CharmBase):
 
 
 if __name__ == "__main__":
-    main(OnosCharm)
+    main(OnosCharm, use_juju_for_storage=True)
