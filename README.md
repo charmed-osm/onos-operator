@@ -192,9 +192,9 @@ Create and activate a virtualenv with the development requirements:
     source venv/bin/activate
     pip install -r requirements-dev.txt
 
-## Testing
+<!-- ## Testing
 
 The Python operator framework includes a very nice harness for testing
 operator behaviour without full deployment. Just `run_tests`:
 
-    ./run_tests
+    ./run_tests -->
