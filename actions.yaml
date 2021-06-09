@@ -1,8 +1,19 @@
 # Copyright 2021 David Garcia
 # See LICENSE file for licensing details.
 
+# Service lifecycle
 restart:
   description: Restart ONOS service
+start:
+  description: Start ONOS service
+stop:
+  description: Stop ONOS service
+
+# Application management
+list-activated-apps:
+  description: List active applications
+list-available-apps:
+  description: List all available applications
 activate-app:
   description: Activate application
   params:
@@ -19,7 +30,51 @@ deactivate-app:
       type: string
   required:
     - name
-list-activated-apps:
-  description: List active applications
-list-available-apps:
-  description: List all available applications
+
+# Authenticatìon: users, groups and roles
+list-roles:
+  description: List available roles. These roles can be used to create new groups.
+add-user:
+  description: Add user
+  params:
+    username:
+      description: Username
+      type: string
+    password:
+      description: Password
+      type: string
+    group:
+      description: Group name
+      type: string
+  required:
+    - username
+    - password
+    - group
+add-group:
+  description: Add user
+  params:
+    groupname:
+      description: Name of the group
+      type: string
+    roles:
+      description: Comma-separated list of roles without spaces
+      type: string
+  required:
+    - groupname
+    - roles
+delete-user:
+  description: Delete user
+  params:
+    username:
+      description: Username
+      type: string
+  required:
+    - username
+delete-group:
+  description: Delete group
+  params:
+    groupname:
+      description: Name of the group
+      type: string
+  required:
+    - groupname

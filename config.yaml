@@ -2,14 +2,24 @@
 # See LICENSE file for licensing details.
 
 options:
-  java-opts:
-    description: JAVA_OPT
-    type: string
-    default: "-XX:+UseG1GC -XX:MaxGCPauseMillis=200 -Dds.lock.timeout.milliseconds=15000"
   enable-gui:
     description: Enable the ONOS gui at port 8181
     type: boolean
     default: True
+  java-opts:
+    description: JAVA_OPT
+    type: string
+    default: "-XX:+UseG1GC -XX:MaxGCPauseMillis=200 -Dds.lock.timeout.milliseconds=15000"
   external-hostname:
     description: External hostname for the ingress
+    type: string
+  admin-password:
+    description: Admin password
+    type: string
+  enable-guest:
+    description: Enable guest user
+    type: boolean
+    default: False
+  guest-password:
+    description: Guest password
     type: string
