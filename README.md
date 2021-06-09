@@ -6,6 +6,35 @@ Charm the deploys ONOS, that stands for Open Network Operating System.
 
 ONOS provides the control plane for a software-defined network (SDN), managing network components, such as switches and links, and running software programs or modules to provide communication services to end hosts and neighboring networks.
 
+## Prepare local environment
+
+Requirements:
+
+- vCPU: 2
+- Memory: 4G
+- Disk: 20G
+
+> With multipass: `multipass launch -c 2 -m 4G -d 20G`
+
+Install Microk8s:
+
+```bash
+sudo snap install microk8s --classic --channel 1.20/stable
+sudo usermod -a -G microk8s `whoami`
+sudo chown -f -R `whoami` ~/.kube
+newgrp microk8s
+microk8s.status --wait-ready
+microk8s.enable storage ingress dns
+```
+
+Install, deploy, and configure Juju:
+
+```bash
+sudo snap install juju --classic --channel 2.9/stable
+juju bootstrap microk8s
+juju add-model onos
+```
+
 ## Usage
 
 ### Deploy the charm (locally)
@@ -20,6 +49,7 @@ cd onos-operator/
 Build and deploy the charm:
 
 ```bash
+sudo snap install charmcraft
 charmcraft build
 juju deploy ./onos.charm --resource onos-image=onosproject/onos:latest
 ```
